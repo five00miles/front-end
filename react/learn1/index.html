@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/react/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    .red {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script type="text/babel">
+    let date
+    function Hello(props) {
+      return <div>
+        <h1>Hello jack</h1>
+        <p>年龄：{props.age}</p>
+        <p>北京时间：{date}</p>
+      </div>
+    }
+
+    class HelloApple extends React.Component {
+      constructor(props) {
+        // 初始化props
+        super(props);
+        // 初始化状态
+        this.state = {
+          name: 'apple',
+          age: 30
+        }
+      }
+      // 也可以这样初始化
+      // state = {
+      //   name: 'apple',
+      //   age: 30
+      // }
+
+      componentWillMount() {
+        console.log('组件加载前')
+      }
+      componentDidMount() {
+        console.log('组件加载后')
+      }
+
+      shouldComponentUpdate(nextProps, nextState) {
+        console.log('数据是否要更新')
+        return true
+      }
+      componentWillUpdate(nextProps, nextState) {
+        console.log('数据将要更新')
+      }
+
+      componentDidUpdate(prevProps, prevState) {
+        console.log('数据已经更新')
+      }
+
+      updateAge = () => {
+        this.setState({
+          name: 'apple jack',
+          age: 100
+        })
+      }
+
+
+      render() {
+        console.log('组建加载或者数据更新')
+        return <div>
+          <h1>Hello {this.state.name}</h1>
+          <p>年龄：{this.state.age}</p>
+          <p>北京时间：{date}</p>
+          <button onClick={this.updateAge}>按钮</button>
+        </div >
+      }
+    }
+    date = new Date().toLocaleTimeString()
+    ReactDOM.render(<HelloApple />, document.getElementById('app'))
+  </script>
+</body>
+
+</html>
