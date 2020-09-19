@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/react/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script type="text/babel">
+    class HelloApple extends React.Component {
+      constructor(props) {
+        // 初始化props
+        super(props);
+
+        // 初始化状态
+        this.state = {
+          list: [1, 2, 3, 4, 5],
+          val: ''
+        }
+      }
+      componentWillMount() {
+        console.log('组件加载前')
+      }
+      componentDidMount() {
+        console.log('组件加载后')
+      }
+
+      shouldComponentUpdate(nextProps, nextState) {
+        console.log('数据是否要更新')
+        return true
+      }
+      componentWillUpdate(nextProps, nextState) {
+        console.log('数据将要更新')
+      }
+
+      componentDidUpdate(prevProps, prevState) {
+        console.log('数据已经更新')
+      }
+
+      handleInput = (event) => {
+        console.log('daa')
+        this.setState({
+          val: event.target.value
+        })
+      }
+      handleAdd = (event) => {
+        const { val, list } = this.state
+
+        list.push(val)
+
+        this.setState({
+          list
+        })
+      }
+
+
+      render() {
+        console.log('组建加载或者数据更新')
+
+        const arr = this.state.list
+        let listItem = []
+
+        arr.forEach(item => {
+          let li = <li key={item}>{item}</li>
+          listItem.push(li)
+        })
+        console.log('listItem', listItem)
+        return <div>
+          <ul>
+            {listItem}
+          </ul>
+          <input type="text" val={this.val} onChange={this.handleInput} />
+          <button onClick={this.handleAdd}>添加</button>
+        </div >
+      }
+    }
+    ReactDOM.render(<HelloApple />, document.getElementById('app'))
+  </script>
+</body>
+
+</html>
