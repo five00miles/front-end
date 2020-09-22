@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'reset.css'
 import 'antd/dist/antd.css';
 import './index.scss';
 

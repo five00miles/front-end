@@ -1,6 +1,9 @@
 import React from 'react';
-import { Button } from 'antd';
 import './App.scss';
+import { HashRouter, Switch, Route, Link } from 'react-router-dom'
+
+import IndexPage from '@/views/Index.js'
+import LoginPage from '@/views/Login.js'
 
 class App extends React.Component {
   constructor(...props) {
@@ -12,9 +15,17 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <div>
-          <Button type="primary" ghost={true}>按钮</Button>
-        </div>
+        <HashRouter>
+          <ul>
+            <li><Link to="/">首页</Link></li>
+            <li><Link to="/login">登陆</Link></li>
+          </ul>
+          <Switch>
+            <Route path="/" exact component={IndexPage}></Route>
+            <Route path="/login" component={LoginPage}></Route>
+          </Switch>
+        </HashRouter>
+
       </div>
     )
   }
